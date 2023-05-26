@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { credentialsSelector } from '../auths/authsSlice';
 import Axios from '../../utils/fetch';
 import Rating from 'react-rating';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { Link } from "react-router-dom";
 
 const PlaceVote = ({caption, placeOrUpdateVote, handleToggleVotes}) => {
 
@@ -37,19 +37,25 @@ const PlaceVote = ({caption, placeOrUpdateVote, handleToggleVotes}) => {
     }
   }
 
-  return (
-    <div onMouseLeave={handleToggleVotes} className="flex justify-end items-center space-x-1 m-2">
-      <Rating
-        emptySymbol={<FontAwesomeIcon className="h-4 w-4 text-yellow-300" icon={icon({name: 'star', style: 'regular'})} />}
-        fullSymbol={<FontAwesomeIcon className="h-4 w-4 text-yellow-300" icon={icon({name: 'star'})} />}
-        start={0}
-        stop={5}
-        step={1} 
-        value={rate} 
-        onHover={(val) => setRate(val)} onClick={putVote}  
-      />
+  if (user) {
+    return (
+      <div onMouseLeave={handleToggleVotes} className="flex justify-end items-center space-x-1 m-2">
+        <Rating
+          emptySymbol={<FontAwesomeIcon className="h-4 w-4 text-yellow-300" icon={icon({name: 'star', style: 'regular'})} />}
+          fullSymbol={<FontAwesomeIcon className="h-4 w-4 text-yellow-300" icon={icon({name: 'star'})} />}
+          start={0}
+          stop={5}
+          step={1} 
+          value={rate} 
+          onHover={(val) => setRate(val)} onClick={putVote}  
+        />
+      </div>
+    );
+  } else {
+    return <div className="flex justify-end items-center space-x-1 m-2" onMouseLeave={handleToggleVotes}>
+      <Link className="text-white underline" to="/login">Login to vote</Link>
     </div>
-  );
+  }
 }
 
 export default PlaceVote;

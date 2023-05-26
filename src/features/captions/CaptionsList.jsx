@@ -37,8 +37,8 @@ const CaptionsList = ({photo}) => {
         </div>
       )
     } else {
-      return <div>
-        <h3>No Captions Yet</h3>
+      return <div className="flex justify-center pb-4">
+        <h3 className="text-3xl font-bold text-rose-500">No Captions Yet</h3>
       </div>
     }
   }

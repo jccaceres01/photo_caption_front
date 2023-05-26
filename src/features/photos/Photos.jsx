@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import PhotoIndex from './PhotoIndex';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPhotosThunk, allPhotosSelector } from './photosSlice';
+import { getAllPhotosThunk, allPhotosSelector, loadingPhotosSelector } from './photosSlice';
 import { Outlet, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import Loading from '../../components/Loading';
 
 const Photos = () => {
 
   const allPhotos = useSelector(allPhotosSelector);
   const dispatch = useDispatch();
+  const loading = useSelector(loadingPhotosSelector);
 
   useEffect(() => {
     dispatch(getAllPhotosThunk());
@@ -26,6 +28,7 @@ const Photos = () => {
           <div className="flex items-center space-x-8">
             <Link to="/photos" className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">All Photos</Link>
             <Link to="/photos/create" className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">New Photo</Link>
+            <Loading show={loading} size={24} />
           </div>
         </div>
 

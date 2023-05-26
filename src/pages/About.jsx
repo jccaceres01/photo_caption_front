@@ -15,7 +15,7 @@ const About = () => {
       </div>
 
       <div className="mt-4 mb-6">
-        <h1>About Page</h1>
+        <p className="text-lg text-start text-gray-400">Ignite your creativity with our Photo Caption Contest Web App! Join a community of witty minds and craft captivating captions for captivating images. Compete, connect, and win exciting prizes. Unleash your imagination and be crowned the ultimate caption master. Join now and let the words do the talking!</p>
       </div>
     </div>
   );

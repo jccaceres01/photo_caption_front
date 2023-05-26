@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { allPhotosSelector, getAllPhotosThunk } from './photosSlice';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const PhotoIndex = () => {
 
@@ -17,7 +17,7 @@ const PhotoIndex = () => {
   if (photos) {
     return (
       <div className="grid grid-cols-4 gap-6">
-        { photos.map((ph, idx) => {
+        {photos.map((ph, idx) => {
           return <div key={idx}>
             <Link to={`/photos/${ ph.id }`} >
               <div className="">

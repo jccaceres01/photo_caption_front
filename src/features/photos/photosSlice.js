@@ -17,6 +17,19 @@ export const getAllPhotosThunk = createAsyncThunk (
     }
   }
 );
+
+// Get all photos thunk
+export const getLastestPhotosThunk = createAsyncThunk (
+  'photos/getLastestPhotosThunk',
+  async ( _ , { rejectWithValue }) => {
+    try {
+      const res = await Axios.get('/photos/lastest');
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response);
+    }
+  }
+);
 // Get all photos thunk
 export const getPhotoByIdThunk = createAsyncThunk (
   'photos/getPhotoById',
@@ -96,6 +109,7 @@ export const updateCaptionVote = createAsyncThunk (
  */
 const initialState = {
   allPhotos: [],
+  lastestPhotos: [],
   selectedPhoto: {},
   selectedPhotoCaptions: [],
   status: {
@@ -126,6 +140,20 @@ const photosSlice = createSlice({
       state.allPhotos = action.payload;
     })
     .addCase(getAllPhotosThunk.rejected, (state, action) => {
+      state.loading = false;
+      handleThunkValidationErrors(state, action);
+    });
+    // getLastestPhotosThunk extra reducers
+    builder.addCase(getLastestPhotosThunk.pending, (state) => {
+      state.loading = true;
+      state.status.code = 0; state.status.msg = 'Requesting photos...';
+    })
+    .addCase(getLastestPhotosThunk.fulfilled, (state, action) => {
+      state.loading = false;
+      state.lastestPhotos = action.payload;
+      handleThunkValidationErrors(state, action);
+    })
+    .addCase(getLastestPhotosThunk.rejected, (state, action) => {
       state.loading = false;
       handleThunkValidationErrors(state, action);
     });
@@ -219,6 +247,7 @@ export const {
  * Export selectors
  */
 export const allPhotosSelector = state => state.photos.allPhotos;
+export const lastestPhotosSelector = state => state.photos.lastestPhotos;
 export const selectedPhotoSelector = state => state.photos.selectedPhoto;
 export const selectedPhotoCaptionsSelector
   = state => state.photos.selectedPhotoCaptions;
