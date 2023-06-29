@@ -9,21 +9,28 @@ const Navbar = ({ credentials }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-full m-0 p-0 bg-rose-500 mb-10">
-      <div className="flex justify-between px-16 py-0 items-center">
-        <Link to="/" className="flex justify-center items-center">
-          <img className="m-0 p-0 w-12 h-12" src={logo} alt="" />
-          <span className="text-white font-bold text-2xl">PhCaptions</span>
+    <nav className="bg-rose-500 m-0 p-0 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <Link to="/" className="flex items-center">
+          <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
+          <span className="self-center text-white font-bold text-2xl whitespace-nowra">PhCaptions</span>
         </Link>
-        
-        <Navs />
-        {
-          credentials
-            ? <span className="flex gap-3 m-0 p-0 h-fit text-white">{ credentials.email } <a className="m-0 px-4 rounded-md bg-white text-black border-2 hover:border-rose-400 hover:text-red-400" href="#" onClick={() => dispatch(logout()) }>LogOut</a></span>
-            : <span className="flex gap-3 m-0 p-0 h-fit text-white hover:text-black"><Link to="/login">Login</Link></span>
-        }
+      <div className="flex md:order-2">
+          {
+            credentials
+              ? <span className="flex gap-3 m-0 p-0 h-fit text-white">{ credentials.email } <a className="m-0 px-4 rounded-md bg-white text-black border-2 hover:border-rose-400 hover:text-red-400" href="#" onClick={() => dispatch(logout()) }>LogOut</a></span>
+              : <span className="flex gap-3 m-0 p-0 h-fit text-white hover:text-black"><Link to="/login">Login</Link></span>
+          }
+          <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+            <span className="sr-only">Open main menu</span>
+            <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
+          </button>
       </div>
-    </div>
+      <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+        <Navs />
+      </div>
+      </div>
+    </nav>
   );
 }
 

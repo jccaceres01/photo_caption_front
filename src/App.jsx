@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <div>
-      <header>
+      <header className=" mb-28">
         <Navbar credentials={credentials} />
       </header>
 

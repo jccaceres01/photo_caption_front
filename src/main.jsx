@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router/router';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import 'flowbite';
 
 const root = createRoot(document.getElementById('root'));
 root.render(

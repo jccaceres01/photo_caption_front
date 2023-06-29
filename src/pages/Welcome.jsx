@@ -30,15 +30,13 @@ const Welcome = () => {
 
       <div className="flex flex-col items-center justify-center mt-4 mb-6">
         <h1 className="text-3xl font-bold mb-12">Lastest Photos</h1>
-        <div className="flex flex-nowrap gap-11 w-5/6 rounded-sm shadow-lg ">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {
-            lastestPhotos.map((photo, idx) => {
-              return (
-                <Link className="border-2 border-rose-500 shrink transition duration-500 ease-in-out hover:shrink-0 max-w-lg w-full rounded-lg " style={{height: 600}} to={`/photos/${photo.id}`} key={idx}>
-                  <img className="w-full h-full rounded-lg " src={photo.image_url} alt={photo.filename} />
-                </Link>
-              )
-            })
+            lastestPhotos.map((photo, idx) => (
+              <Link to={`/photos/${photo.id}`} key={idx}>
+                <img className="h-auto max-w-full rounded-lg" src={photo.image_url} alt={photo.fileName} />
+              </Link>
+            ))
           }
         </div>
       </div>
